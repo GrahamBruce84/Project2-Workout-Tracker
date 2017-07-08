@@ -18,10 +18,10 @@ import java.util.List;
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Context context;
-    private List<String> listDataHeader;
-    private HashMap<String, List<String>> listHashMap;
+    private List<Workout> listDataHeader;
+    private HashMap<String, List<Workout>> listHashMap;
 
-    public ExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<String>> listHashMap) {
+    public ExpandableListAdapter(Context context, List<Workout> listDataHeader, HashMap<String, List<Workout>> listHashMap) {
         this.context = context;
         this.listDataHeader = listDataHeader;
         this.listHashMap = listHashMap;

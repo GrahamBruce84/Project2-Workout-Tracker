@@ -15,8 +15,8 @@ public class WorkoutListActivity extends AppCompatActivity {
 
     private ExpandableListView listView;
     private ExpandableListAdapter listAdapter;
-    private List<String> listDataHeader;
-    private HashMap<String, List<String>> listHash;
+    private List<Workout> listDataHeader;
+    private HashMap<String, List<Workout>> listHash;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
