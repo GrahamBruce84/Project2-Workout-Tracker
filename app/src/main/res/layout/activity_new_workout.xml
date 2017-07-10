@@ -4,13 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.grahambruce.workouttracker.PlannerListActivity">
-
-    <ListView
-        android:id="@+id/workout_list"
-        android:layout_width="395dp"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
+    tools:context="com.example.grahambruce.workouttracker.newWorkoutActivity">
 
 </android.support.constraint.ConstraintLayout>

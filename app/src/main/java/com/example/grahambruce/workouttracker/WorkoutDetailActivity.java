@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import static com.example.grahambruce.workouttracker.R.id.workout_list;
 import static com.example.grahambruce.workouttracker.R.id.workoutname;
 
 public class WorkoutDetailActivity extends AppCompatActivity implements View.OnClickListener {
@@ -42,8 +43,9 @@ public class WorkoutDetailActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View button) {
-
+        Workout workout = (Workout) button.getTag() ;
         Intent intent = new Intent(this, PlannerListActivity.class);
+        intent.putExtra("workoutname", workout.getName());
         startActivity(intent);
     }
 

@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ public class WorkoutListActivity extends AppCompatActivity implements View.OnCli
     private HashMap<String, List<Workout>> listHash;
     private WorkoutList workoutList;
     ArrayList<Workout> list;
+    Button newWorkout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class WorkoutListActivity extends AppCompatActivity implements View.OnCli
         initData();
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listHash);
         listView.setAdapter(listAdapter);
+        newWorkout = (Button)findViewById(R.id.new_workout_button);
     }
 
     private void initData() {
@@ -81,6 +84,11 @@ public class WorkoutListActivity extends AppCompatActivity implements View.OnCli
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClickNewWorkout(View button){
+        Intent intent = new Intent(this, newWorkoutActivity.class);
+        startActivity(intent);
     }
 
     public void onClick(View listItem) {

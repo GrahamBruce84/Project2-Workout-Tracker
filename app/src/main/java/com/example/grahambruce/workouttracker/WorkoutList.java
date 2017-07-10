@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class WorkoutList {
 
-    private ArrayList<Workout> workoutList;
+    private static ArrayList<Workout> workoutList;
 
     public WorkoutList() {
         workoutList = new ArrayList<Workout>();
@@ -24,7 +24,7 @@ public class WorkoutList {
 
     }
 
-    public ArrayList<Workout> getWorkoutList() {
+    public static ArrayList<Workout> getWorkoutList() {
         return new ArrayList<Workout>(workoutList);
     }
 }

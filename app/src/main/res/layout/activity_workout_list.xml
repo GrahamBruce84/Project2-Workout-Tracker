@@ -9,11 +9,24 @@
 
     <ExpandableListView
         android:id="@+id/lvExp"
+        style="@android:style/Widget.DeviceDefault.Light.ExpandableListView"
         android:layout_width="fill_parent"
         android:layout_height="551dp"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp">
-    </ExpandableListView>
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/new_workout_button"
+        tools:layout_editor_absoluteX="0dp"></ExpandableListView>
+
+    <Button
+        android:id="@+id/new_workout_button"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="onClickNewWorkout"
+        android:text="Add New Workout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

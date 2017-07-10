@@ -19,8 +19,9 @@
         </activity>
         <activity
             android:name=".WorkoutDetailActivity"
-            android:parentActivityName=".WorkoutListActivity"></activity>
-        <activity android:name=".PlannerListActivity"></activity>
+            android:parentActivityName=".WorkoutListActivity" />
+        <activity android:name=".PlannerListActivity" />
+        <activity android:name=".newWorkoutActivity"></activity>
     </application>
 
 </manifest>

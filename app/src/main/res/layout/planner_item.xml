@@ -13,6 +13,7 @@
         android:layout_height="52dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:textSize="14sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
@@ -27,7 +28,7 @@
         android:layout_marginTop="-60dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Sets;"
+        android:text="Sets:"
         app:layout_constraintLeft_toRightOf="@+id/editText4"
         app:layout_constraintTop_toTopOf="@+id/editText4" />
 
