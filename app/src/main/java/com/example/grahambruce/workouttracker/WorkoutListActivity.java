@@ -1,28 +1,37 @@
 package com.example.grahambruce.workouttracker;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static android.R.id.list;
-import static android.R.string.no;
-
-public class WorkoutListActivity extends AppCompatActivity {
+public class WorkoutListActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ExpandableListView listView;
     private ExpandableListAdapter listAdapter;
-    private List<Workout> listDataHeader;
+    private List<String> listDataHeader;
     private HashMap<String, List<Workout>> listHash;
+    private WorkoutList workoutList;
+    ArrayList<Workout> list;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_list);
 
-        listView = (ExpandableListView)findViewById(R.id.lvExp);
+        workoutList = new WorkoutList();
+        list = workoutList.getWorkoutList();
+
+        listView = (ExpandableListView) findViewById(R.id.lvExp);
         initData();
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listHash);
         listView.setAdapter(listAdapter);
@@ -36,25 +45,53 @@ public class WorkoutListActivity extends AppCompatActivity {
         listDataHeader.add("Intermediate");
         listDataHeader.add("Advanced");
 
-        List<String> novice = new ArrayList<>();
-        novice.add("Push ups");
-        novice.add("Sit ups");
-        novice.add("Assisted Pull ups");
+        ArrayList<Workout> novice = new ArrayList<>();
+        ArrayList<Workout> intermediate = new ArrayList<>();
+        ArrayList<Workout> advanced = new ArrayList<>();
 
-        List<String> intermediate = new ArrayList<>();
-        intermediate.add("Spiderman Push ups");
-        intermediate.add("Weighted Sit ups");
-        intermediate.add("Pull ups");
+        for (Workout workout : list) {
+            if (workout.getLevel() == "Novice") {
+                novice.add(workout);
+            }
+            if (workout.getLevel() == "Intermediate") {
+                intermediate.add(workout);
+            }
+            if (workout.getLevel() == "Advanced") {
+                advanced.add(workout);
+            }
 
-        List<String> advanced = new ArrayList<>();
-        advanced.add("Judo Push up");
-        advanced.add("V Sit ups");
-        advanced.add("Weighted Pull ups");
+            listHash.put(listDataHeader.get(0), novice);
+            listHash.put(listDataHeader.get(1), intermediate);
+            listHash.put(listDataHeader.get(2), advanced);
 
-        listHash.put(listDataHeader.get(0), novice);
-        listHash.put(listDataHeader.get(1), intermediate);
-        listHash.put(listDataHeader.get(2), advanced);
+        }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.activity_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_mainpage){
+            Intent intent = new Intent(this, WorkoutListActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void onClick(View listItem) {
+        Workout workout = (Workout) listItem.getTag();
+        Intent intent = new Intent(this, WorkoutDetailActivity.class);
+        Bundle extras = new Bundle();
+        extras.putInt("workoutimage", workout.getImage());
+        extras.putString("workoutname", workout.getName());
+        extras.putString("workoutdesc", workout.getDescription());
+        intent.putExtras(extras);
+        startActivity(intent);
+    }
 
 }

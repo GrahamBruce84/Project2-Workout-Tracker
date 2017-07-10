@@ -10,11 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".WorkoutListActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>></activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            >
+        </activity>
+        <activity
+            android:name=".WorkoutDetailActivity"
+            android:parentActivityName=".WorkoutListActivity"></activity>
+        <activity android:name=".PlannerListActivity"></activity>
     </application>
 
 </manifest>

@@ -18,10 +18,10 @@ import java.util.List;
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Context context;
-    private List<Workout> listDataHeader;
+    private List<String> listDataHeader;
     private HashMap<String, List<Workout>> listHashMap;
 
-    public ExpandableListAdapter(Context context, List<Workout> listDataHeader, HashMap<String, List<Workout>> listHashMap) {
+    public ExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<Workout>> listHashMap) {
         this.context = context;
         this.listDataHeader = listDataHeader;
         this.listHashMap = listHashMap;
@@ -33,28 +33,28 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public int getChildrenCount(int i) {
-        return listHashMap.get(listDataHeader.get(i)).size();
+    public int getChildrenCount(int item) {
+        return listHashMap.get(listDataHeader.get(item)).size();
     }
 
     @Override
-    public Object getGroup(int i) {
-        return listDataHeader.get(i);
+    public Object getGroup(int item) {
+        return listDataHeader.get(item);
     }
 
     @Override
-    public Object getChild(int i, int i1) {
-        return listHashMap.get(listDataHeader.get(i)).get(i1); // i == group item, i1 = child item
+    public Object getChild(int item, int item1) {
+        return listHashMap.get(listDataHeader.get(item)).get(item1); // i == group item, i1 = child item
     }
 
     @Override
-    public long getGroupId(int i) {
-        return i;
+    public long getGroupId(int item) {
+        return item;
     }
 
     @Override
-    public long getChildId(int i, int i1) {
-        return i1;
+    public long getChildId(int item, int item1) {
+        return item1;
     }
 
     @Override
@@ -63,10 +63,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
-        String headerTitle = (String) getGroup(i);
+    public View getGroupView(int item, boolean b, View view, ViewGroup viewGroup) {
+        String headerTitle = (String) getGroup(item);
         if (view == null) {
-            LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.list_group, null);
         }
         TextView lblListHeader = (TextView) view.findViewById(R.id.lblListHeader);
@@ -76,20 +76,23 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
-        final String childText = (String) getChild(i, i1);
+    public View getChildView(int item, int item1, boolean b, View view, ViewGroup viewGroup) {
+        final Workout childWorkout = (Workout) getChild(item, item1);
         if (view == null) {
-            LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.list_item, null);
         }
 
         TextView txtListChild = (TextView)view.findViewById(R.id.lblListItem);
-        txtListChild.setText(childText);
+        txtListChild.setText(childWorkout.getName());
+
+        view.setTag(childWorkout);
+
         return view;
     }
 
     @Override
-    public boolean isChildSelectable(int i, int i1) {
+    public boolean isChildSelectable(int item, int item1) {
         return true;
     }
 }

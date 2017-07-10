@@ -4,16 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.grahambruce.workouttracker.WorkoutListActivity"
-    android:onClick="onClick">
-
-    <ExpandableListView
-        android:id="@+id/lvExp"
-        android:layout_width="fill_parent"
-        android:layout_height="551dp"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp">
-    </ExpandableListView>
-
+    tools:context="com.example.grahambruce.workouttracker.PlannerListActivity">
 
 </android.support.constraint.ConstraintLayout>
