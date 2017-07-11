@@ -19,7 +19,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
-public class PlannerListActivity extends AppCompatActivity {
+public class PlannerListActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button deleteButton;
     ArrayList<Workout> myPlannedWorkout;
@@ -58,6 +58,7 @@ public class PlannerListActivity extends AppCompatActivity {
         editor.putString("myPlannedWorkout", gson.toJson(myPlannedWorkout));
         editor.apply();
         Toast.makeText(this, "Workout Added", Toast.LENGTH_SHORT).show();
+        sharedPref.edit();
         PlannerAdapter plannerAdapter = new PlannerAdapter(this, myPlannedWorkout);
 
         ListView listView = (ListView) findViewById(R.id.workout_list);
@@ -81,6 +82,7 @@ public class PlannerListActivity extends AppCompatActivity {
         }
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("myPlannedWorkout", gson.toJson(myPlannedWorkout));
+        editor.clear();
         editor.apply();
         finish();
         startActivity(getIntent());
@@ -102,4 +104,8 @@ public class PlannerListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onClick(View view) {
+
+    }
 }

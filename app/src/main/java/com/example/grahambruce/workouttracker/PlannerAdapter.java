@@ -1,6 +1,7 @@
 package com.example.grahambruce.workouttracker;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Movie;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
  */
 
 public class PlannerAdapter extends ArrayAdapter<Workout> {
+
+    SharedPreferences sharedPref;
 
     public PlannerAdapter(Context context, ArrayList<Workout> workouts){
         super(context, 0, workouts);

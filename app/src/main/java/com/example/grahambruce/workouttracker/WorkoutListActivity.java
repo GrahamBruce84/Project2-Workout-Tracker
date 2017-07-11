@@ -1,6 +1,8 @@
 package com.example.grahambruce.workouttracker;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -10,6 +12,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,21 +26,46 @@ public class WorkoutListActivity extends AppCompatActivity implements View.OnCli
     private ExpandableListAdapter listAdapter;
     private List<String> listDataHeader;
     private HashMap<String, List<Workout>> listHash;
-    private WorkoutList workoutList;
-    ArrayList<Workout> list;
+    private ArrayList<Workout> workoutList;
     Button newWorkout;
+    SharedPreferences sharedPref;
+    Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_list);
 
-        workoutList = new WorkoutList();
-        list = workoutList.getWorkoutList();
+        sharedPref = getSharedPreferences(getString(R.string.preference_list_key), Context.MODE_PRIVATE);
+//        SharedPreferences.Editor deleter = sharedPref.edit();
+//        deleter.clear();
+//        deleter.apply();
+
+        String workList = sharedPref.getString("workoutList", new ArrayList<Workout>().toString());
+
+        gson = new Gson();
+
+        TypeToken<ArrayList<Workout>> workoutArrayList = new TypeToken<ArrayList<Workout>>() {
+        };
+
+         workoutList = gson.fromJson(workList, workoutArrayList.getType());
+
+//        workoutList = new WorkoutList().getWorkoutListArray();
+        if(getIntent().getExtras() != null) {
+            Workout newWorkout = (Workout) getIntent().getExtras().get("workout");
+
+            workoutList.add(newWorkout);
+        }
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putString("workoutList", gson.toJson(workoutList));
+        editor.apply();
+        Toast.makeText(this, "Workout Added", Toast.LENGTH_SHORT).show();
 
         listView = (ExpandableListView) findViewById(R.id.lvExp);
         initData();
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listHash);
+
         listView.setAdapter(listAdapter);
         newWorkout = (Button)findViewById(R.id.new_workout_button);
     }
@@ -52,14 +82,14 @@ public class WorkoutListActivity extends AppCompatActivity implements View.OnCli
         ArrayList<Workout> intermediate = new ArrayList<>();
         ArrayList<Workout> advanced = new ArrayList<>();
 
-        for (Workout workout : list) {
-            if (workout.getLevel() == "Novice") {
+        for (Workout workout : workoutList) {
+            if (workout.getLevel().equals("Novice")) {
                 novice.add(workout);
             }
-            if (workout.getLevel() == "Intermediate") {
+            if (workout.getLevel().equals("Intermediate")) {
                 intermediate.add(workout);
             }
-            if (workout.getLevel() == "Advanced") {
+            if (workout.getLevel().equals("Advanced")) {
                 advanced.add(workout);
             }
 
