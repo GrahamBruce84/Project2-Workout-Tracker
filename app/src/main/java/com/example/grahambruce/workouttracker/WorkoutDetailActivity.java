@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import static com.example.grahambruce.workouttracker.R.id.workout_list;
+import static android.R.attr.id;
 import static com.example.grahambruce.workouttracker.R.id.workoutname;
 
 public class WorkoutDetailActivity extends AppCompatActivity implements View.OnClickListener {
@@ -20,6 +20,7 @@ public class WorkoutDetailActivity extends AppCompatActivity implements View.OnC
     TextView workoutDescriptionText;
     ImageView workoutPicImage;
     Button plannerButton;
+    Workout workout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +32,10 @@ public class WorkoutDetailActivity extends AppCompatActivity implements View.OnC
         workoutPicImage = (ImageView) findViewById(R.id.workoutpic);
         plannerButton = (Button) findViewById(R.id.planner_button);
 
-        Bundle extras = getIntent().getExtras();
-        int workoutpic = extras.getInt("workoutimage");
-        String workoutname = extras.getString("workoutname");
-        String workoutdesc = extras.getString("workoutdesc");
+         workout = (Workout) getIntent().getExtras().get("workout");
+        int workoutpic = workout.getImage();
+        String workoutname = workout.getName();
+        String workoutdesc = workout.getDescription();
 
         workoutPicImage.setImageResource(workoutpic);
         workoutNameText.setText(workoutname);
@@ -43,9 +44,8 @@ public class WorkoutDetailActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View button) {
-        Workout workout = (Workout) button.getTag() ;
         Intent intent = new Intent(this, PlannerListActivity.class);
-        intent.putExtra("workoutname", workout.getName());
+        intent.putExtra("workout", workout);
         startActivity(intent);
     }
 
@@ -58,7 +58,7 @@ public class WorkoutDetailActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_mainpage){
+        if (item.getItemId() == R.id.action_mainpage) {
             Intent intent = new Intent(this, WorkoutListActivity.class);
             startActivity(intent);
         }

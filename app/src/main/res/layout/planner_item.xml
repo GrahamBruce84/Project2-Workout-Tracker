@@ -21,19 +21,19 @@
         tools:text="TextView" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/setbox"
         android:layout_width="173dp"
         android:layout_height="44dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="-60dp"
+        android:layout_marginLeft="-21dp"
+        android:layout_marginTop="-8dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Sets:"
-        app:layout_constraintLeft_toRightOf="@+id/editText4"
-        app:layout_constraintTop_toTopOf="@+id/editText4" />
+        app:layout_constraintLeft_toRightOf="@+id/repbox"
+        app:layout_constraintTop_toTopOf="@+id/repbox" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/repbox"
         android:layout_width="173dp"
         android:layout_height="44dp"
         android:layout_marginLeft="8dp"
@@ -43,4 +43,17 @@
         android:text="Reps:"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/workout_title" />
+
+    <Button
+        android:id="@+id/delete_button"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        android:onClick="OnDeleteButtonClick"
+        android:text="Delete"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setbox" />
 </android.support.constraint.ConstraintLayout>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -30,8 +31,10 @@ public class PlannerAdapter extends ArrayAdapter<Workout> {
         Workout currentWorkout = getItem(position);
         TextView workoutTitle = (TextView)listItemView.findViewById(R.id.workout_title);
         workoutTitle.setText(currentWorkout.getName());
-
+        EditText workoutSet = (EditText)listItemView.findViewById(R.id.repbox);
+        EditText workoutRep = (EditText)listItemView.findViewById(R.id.setbox);
         listItemView.setTag(currentWorkout);
+
 
         return listItemView;
     }

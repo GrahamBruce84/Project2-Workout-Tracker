@@ -94,11 +94,7 @@ public class WorkoutListActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View listItem) {
         Workout workout = (Workout) listItem.getTag();
         Intent intent = new Intent(this, WorkoutDetailActivity.class);
-        Bundle extras = new Bundle();
-        extras.putInt("workoutimage", workout.getImage());
-        extras.putString("workoutname", workout.getName());
-        extras.putString("workoutdesc", workout.getDescription());
-        intent.putExtras(extras);
+        intent.putExtra("workout", workout);
         startActivity(intent);
     }
 
