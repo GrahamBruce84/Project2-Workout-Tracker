@@ -3,6 +3,7 @@ package com.example.grahambruce.workouttracker;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Movie;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +19,6 @@ import java.util.ArrayList;
 
 public class PlannerAdapter extends ArrayAdapter<Workout> {
 
-    SharedPreferences sharedPref;
-
     public PlannerAdapter(Context context, ArrayList<Workout> workouts){
         super(context, 0, workouts);
     }
@@ -34,11 +33,17 @@ public class PlannerAdapter extends ArrayAdapter<Workout> {
         Workout currentWorkout = getItem(position);
         TextView workoutTitle = (TextView)listItemView.findViewById(R.id.workout_title);
         workoutTitle.setText(currentWorkout.getName());
-        EditText workoutSet = (EditText)listItemView.findViewById(R.id.repbox);
-        EditText workoutRep = (EditText)listItemView.findViewById(R.id.setbox);
+        EditText workoutSet = (EditText)listItemView.findViewById(R.id.setbox);
+        workoutSet.setText(Integer.toString(currentWorkout.getSets()));
+
+        EditText workoutRep = (EditText)listItemView.findViewById(R.id.repbox);
+        workoutRep.setText(Integer.toString(currentWorkout.getReps()));
+
         listItemView.setTag(currentWorkout);
 
 
         return listItemView;
     }
+
+
 }

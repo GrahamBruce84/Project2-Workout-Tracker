@@ -53,6 +53,7 @@
         android:layout_marginTop="8dp"
         android:onClick="onClick"
         android:text="Add to planner"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

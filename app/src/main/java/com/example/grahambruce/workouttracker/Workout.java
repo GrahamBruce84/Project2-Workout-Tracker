@@ -12,6 +12,8 @@ public class Workout implements Serializable{
     private int image;
     private String name;
     private String description;
+    private int reps;
+    private int sets;
 
     public Workout(String level, int image, String name, String description){
         this.level = level;
@@ -34,5 +36,21 @@ public class Workout implements Serializable{
 
     public String getDescription() {
         return this.description;
+    }
+
+    public int getReps() {
+        return reps;
+    }
+
+    public void setReps(int reps) {
+        this.reps = reps;
+    }
+
+    public int getSets() {
+        return sets;
+    }
+
+    public void setSets(int sets) {
+        this.sets = sets;
     }
 }

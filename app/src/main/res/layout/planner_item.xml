@@ -27,8 +27,8 @@
         android:layout_marginLeft="-21dp"
         android:layout_marginTop="-8dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Sets:"
+        android:inputType="number"
+        android:hint="Sets:"
         app:layout_constraintLeft_toRightOf="@+id/repbox"
         app:layout_constraintTop_toTopOf="@+id/repbox" />
 
@@ -39,8 +39,8 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="0dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Reps:"
+        android:inputType="number"
+        android:hint="Reps:"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/workout_title" />
 
@@ -55,5 +55,18 @@
         android:text="Delete"
         android:textColor="@color/colorPrimary"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setbox" />
+
+    <Button
+        android:id="@+id/save_button"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        android:onClick="onClickSave"
+        android:text="Save"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintRight_toLeftOf="@+id/delete_button"
         app:layout_constraintTop_toBottomOf="@+id/setbox" />
 </android.support.constraint.ConstraintLayout>

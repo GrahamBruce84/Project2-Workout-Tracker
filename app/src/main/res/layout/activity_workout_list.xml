@@ -25,6 +25,7 @@
         android:layout_marginTop="8dp"
         android:onClick="onClickNewWorkout"
         android:text="Add New Workout"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

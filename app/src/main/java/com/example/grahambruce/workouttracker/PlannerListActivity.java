@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,12 +20,16 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
-public class PlannerListActivity extends AppCompatActivity implements View.OnClickListener{
+import static android.R.attr.tag;
+
+public class PlannerListActivity extends AppCompatActivity {
 
     Button deleteButton;
+    Button saveButton;
     ArrayList<Workout> myPlannedWorkout;
     SharedPreferences sharedPref;
     Gson gson;
+    Workout workout;
 
 
     @Override
@@ -33,7 +38,7 @@ public class PlannerListActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_planner_list);
 
         deleteButton = (Button) findViewById(R.id.delete_button);
-
+        saveButton = (Button) findViewById(R.id.save_button);
 
 
         sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
@@ -48,44 +53,68 @@ public class PlannerListActivity extends AppCompatActivity implements View.OnCli
         TypeToken<ArrayList<Workout>> workoutArrayList = new TypeToken<ArrayList<Workout>>() {
         };
 
-        ArrayList<Workout> myPlannedWorkout = gson.fromJson(planner, workoutArrayList.getType());
-
-        Workout newPlannedWorkout = (Workout) getIntent().getSerializableExtra("workout");
-
-        myPlannedWorkout.add(newPlannedWorkout);
+        myPlannedWorkout = gson.fromJson(planner, workoutArrayList.getType());
+        if (getIntent().getExtras() != null) {
+            Workout newPlannedWorkout = (Workout) getIntent().getExtras().get("workout");
+            Toast.makeText(this, "Workout Added", Toast.LENGTH_SHORT).show();
+            myPlannedWorkout.add(newPlannedWorkout);
+        }
         SharedPreferences.Editor editor = sharedPref.edit();
 
         editor.putString("myPlannedWorkout", gson.toJson(myPlannedWorkout));
         editor.apply();
-        Toast.makeText(this, "Workout Added", Toast.LENGTH_SHORT).show();
+
         sharedPref.edit();
         PlannerAdapter plannerAdapter = new PlannerAdapter(this, myPlannedWorkout);
 
         ListView listView = (ListView) findViewById(R.id.workout_list);
         listView.setAdapter(plannerAdapter);
-
-
     }
 
     public Object getItem(int position) {
         return myPlannedWorkout.get(position);
     }
 
+    public void onClickSave(View view) {
+        View parent = (View) view.getParent();
+        Workout tag = (Workout) parent.getTag();
+
+        EditText workoutReps = (EditText) parent.findViewById(R.id.repbox);
+        EditText workoutSets = (EditText) parent.findViewById(R.id.setbox);
+
+        for (Workout workout : myPlannedWorkout) {
+            if(workout == tag){
+                int reps = Integer.parseInt(workoutReps.getText().toString());
+                workout.setReps(reps);
+
+                int sets = Integer.parseInt(workoutSets.getText().toString());
+                workout.setSets(sets);
+            }
+        }
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("myPlannedWorkout", gson.toJson(myPlannedWorkout));
+        editor.apply();
+        Intent intent = new Intent(this, WorkoutListActivity.class);
+        finish();
+        startActivity(intent);
+    }
+
     public void OnDeleteButtonClick(View view) {
         View parent = (View) view.getParent();
-        String tag = parent.getTag().toString();
+        Workout tag = (Workout) parent.getTag();
         for (Workout workout : myPlannedWorkout) {
-            if (workout.getName().equals(tag)) {
+            if (workout.equals(tag)) {
                 myPlannedWorkout.remove(workout);
                 break;
             }
         }
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("myPlannedWorkout", gson.toJson(myPlannedWorkout));
-        editor.clear();
         editor.apply();
+        Intent intent = new Intent(this, PlannerListActivity.class);
         finish();
-        startActivity(getIntent());
+        startActivity(intent);
     }
 
     @Override
@@ -101,11 +130,11 @@ public class PlannerListActivity extends AppCompatActivity implements View.OnCli
             Intent intent = new Intent(this, WorkoutListActivity.class);
             startActivity(intent);
         }
+        if (item.getItemId() == R.id.action_planner) {
+            Intent intent = new Intent(this, PlannerListActivity.class);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(View view) {
-
-    }
 }

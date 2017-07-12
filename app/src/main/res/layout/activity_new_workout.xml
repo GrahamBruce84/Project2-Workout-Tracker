@@ -8,29 +8,32 @@
 
     <ImageButton
         android:id="@+id/imageButton"
+        style="@android:style/Widget.Holo.ImageButton"
         android:layout_width="121dp"
         android:layout_height="121dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:onClick="onClick"
+        android:visibility="visible"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:color/darker_gray"
-        android:layout_marginStart="8dp" />
+        app:srcCompat="@android:color/darker_gray" />
 
     <EditText
         android:id="@+id/new_workout_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:ems="10"
+        android:hint="Enter workout name"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toRightOf="@+id/imageButton"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="91dp"
-        tools:text="Enter workout name" />
+        app:layout_constraintRight_toRightOf="parent" />
 
     <Button
         android:id="@+id/save_new_workout"
@@ -57,10 +60,10 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="0dp"
         android:ems="10"
+        android:hint="Enter description"
         android:inputType="textPersonName"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workout_level"
-        tools:text="Enter description" />
+        app:layout_constraintTop_toBottomOf="@+id/workout_level" />
 
     <EditText
         android:id="@+id/workout_level"
@@ -69,9 +72,9 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="0dp"
         android:ems="10"
+        android:hint="Enter workout difficulty"
         android:inputType="textPersonName"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton"
-        tools:text="Enter workout difficulty" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
 
 </android.support.constraint.ConstraintLayout>

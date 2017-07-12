@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">WorkoutTracker</string>
     <string name="main_page">Main Page</string>
+    <string name="planner_page">Workout Planner</string>
     <string name="preference_file_key">PLANNER</string>
     <string name="preference_list_key">WORKOUTLIST</string>
 </resources>

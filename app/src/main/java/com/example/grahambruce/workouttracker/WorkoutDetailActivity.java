@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import static android.R.attr.id;
 import static com.example.grahambruce.workouttracker.R.id.workoutname;
 
 public class WorkoutDetailActivity extends AppCompatActivity implements View.OnClickListener {
@@ -58,8 +57,12 @@ public class WorkoutDetailActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_mainpage) {
+        if (item.getItemId() == R.id.action_mainpage){
             Intent intent = new Intent(this, WorkoutListActivity.class);
+            startActivity(intent);
+        }
+        if (item.getItemId() == R.id.action_planner){
+            Intent intent = new Intent(this, PlannerListActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

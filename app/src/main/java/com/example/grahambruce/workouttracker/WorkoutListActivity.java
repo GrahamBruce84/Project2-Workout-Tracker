@@ -113,6 +113,10 @@ public class WorkoutListActivity extends AppCompatActivity implements View.OnCli
             Intent intent = new Intent(this, WorkoutListActivity.class);
             startActivity(intent);
         }
+        if (item.getItemId() == R.id.action_planner){
+            Intent intent = new Intent(this, PlannerListActivity.class);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 
